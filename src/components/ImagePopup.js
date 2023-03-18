@@ -3,7 +3,7 @@ import { iconClosePopup } from "../utils/constants";
 
 function ImagePopup(card) {
   return (
-    <div className={`popup popup_type_large-photo ${card.link ? "popup_opened" : ""}`}>
+    <div className={`popup popup_type_large-photo ${card.link ? "popup_opened popup_animation" : ""}`}>
       <div className="popup__container-large-photo">
         <button className="popup__close-icon" type="button">
           <img className="popup__close-icon-img link" src={iconClosePopup} alt="Кнопка закрытия окна" onClick={card.onClose} />

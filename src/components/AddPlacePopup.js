@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const [name, setName] = React.useState("");
-  const [link, setLink] = React.useState("");
+function AddPlacePopup({ isOpen, onClose, onAddPlace, buttonText }) {
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
 
   function handleChangeName(evt) {
     setName(evt.target.value);
@@ -18,8 +18,13 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     onAddPlace({ name, link });
   }
 
+  React.useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
+
   return (
-    <PopupWithForm name="photo" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+    <PopupWithForm name="photo" title="Новое место" buttonText={buttonText} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
       <div className="popup__input-container">
         <input
           className="popup__input popup__input_text_place"
