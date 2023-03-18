@@ -1,7 +1,7 @@
 .page {
   margin: 0 auto;
   padding: 0;
-  /* max-width: 1280px; */
+  max-width: 1280px;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -23,4 +23,8 @@
   .page {
     margin: 0 auto;
   }
+}
+
+html {
+  background-color: #000000;
 }
