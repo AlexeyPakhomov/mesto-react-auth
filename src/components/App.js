@@ -120,9 +120,9 @@ function App() {
       .then((currentUserData) => {
         setCurrentUser(currentUserData);
         closeAllPopups();
-        setIsLoading(false);
       })
-      .catch((err) => console.log(`Ошибка редактирования попап профиля: ${err}`));
+      .catch((err) => console.log(`Ошибка редактирования попап профиля: ${err}`))
+      .finally(() => setIsLoading(false));
   }
 
   function handleUpdateAvatar(data) {
@@ -132,9 +132,9 @@ function App() {
       .then((avatar) => {
         setCurrentUser(avatar);
         closeAllPopups();
-        setIsLoading(false);
       })
-      .catch((err) => console.log(`Ошибка редактирования аватара: ${err}`));
+      .catch((err) => console.log(`Ошибка редактирования аватара: ${err}`))
+      .finally(() => setIsLoading(false));
   }
 
   function handleAddPlaceSubmit(data) {
@@ -144,9 +144,9 @@ function App() {
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
-        setIsLoading(false);
       })
-      .catch((err) => console.log(`Ошибка добавления новых карточек: ${err}`));
+      .catch((err) => console.log(`Ошибка добавления новых карточек: ${err}`))
+      .finally(() => setIsLoading(false));
   }
 
   function handleRegister(data) {
