@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Card from "./Card";
-import iconProfile from "../images/edit-button.svg";
-import iconPhoto from "../images/add-button.svg";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import Card from './Card';
+import iconProfile from '../images/edit-button.svg';
+import iconPhoto from '../images/add-button.svg';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -24,12 +24,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onC
           </button>
         </article>
         <button className="profile__add-button link" type="button" onClick={onAddPlace}>
-          <img
-            className="profile__add-button-img"
-            src={iconPhoto}
-            alt="
-		Кнопка добавления контента"
-          />
+          <img className="profile__add-button-img" src={iconPhoto} alt="Кнопка добавления контента" />
         </button>
       </section>
 
