@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
-import api from "../utils/Api";
-import * as auth from "../utils/auth";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import api from '../utils/Api';
+import * as auth from '../utils/auth';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
-import Header from "./Header";
-import Register from "./Register";
-import Login from "./Login";
-import InfoTooltip from "./InfoTooltip";
-import Main from "./Main";
-import Footer from "./Footer";
-import ImagePopup from "./ImagePopup";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
+import Header from './Header';
+import Register from './Register';
+import Login from './Login';
+import InfoTooltip from './InfoTooltip';
+import Main from './Main';
+import Footer from './Footer';
+import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
@@ -27,7 +27,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [isRegistrationStatus, setIsRegistrationStatus] = useState(false);
-  const [authorizationEmail, setAuthorizationEmail] = useState("");
+  const [authorizationEmail, setAuthorizationEmail] = useState('');
   const [menuBurgerActive, setMenuBurgerActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -155,7 +155,7 @@ function App() {
       .then((data) => {
         setIsRegistrationStatus(true);
         handleInfoTooltip();
-        navigate("/sign-in", { replace: true });
+        navigate('/sign-in', { replace: true });
       })
       .catch((err) => {
         console.log(`Ошибка регистрации: ${err}`);
@@ -165,14 +165,14 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
       auth
         .validityToken(jwt)
         .then((res) => {
           setAuthorizationEmail(res.data.email);
           setLoggedIn(true);
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
         })
         .catch((err) => console.log(err));
     }
@@ -183,9 +183,9 @@ function App() {
       .authorization({ email: data.email, password: data.password })
       .then((data) => {
         setLoggedIn(true);
-        localStorage.setItem("jwt", data.token);
+        localStorage.setItem('jwt', data.token);
         handleTokenCheck();
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(`Ошибка авторизации: ${err}`);
@@ -199,29 +199,29 @@ function App() {
   }, []);
 
   function handleEscClose(evt) {
-    if (evt.key === "Escape") {
+    if (evt.key === 'Escape') {
       closeAllPopups();
     }
   }
 
   function handleOverlayClose(evt) {
     const targetClassList = evt.target.classList;
-    if (targetClassList.contains("popup") || targetClassList.contains("popup__close-icon-img")) {
+    if (targetClassList.contains('popup') || targetClassList.contains('popup__close-icon-img')) {
       closeAllPopups();
     }
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", handleEscClose);
-    window.addEventListener("mousedown", handleOverlayClose);
+    window.addEventListener('keydown', handleEscClose);
+    window.addEventListener('mousedown', handleOverlayClose);
   }, []);
 
   function handleSignOut() {
     setLoggedIn(false);
-    setAuthorizationEmail("");
-    localStorage.removeItem("jwt");
+    setAuthorizationEmail('');
+    localStorage.removeItem('jwt');
     setMenuBurgerActive(false);
-    navigate("/sign-in", { replace: true });
+    navigate('/sign-in', { replace: true });
   }
 
   return (
@@ -253,29 +253,42 @@ function App() {
               />
             }
           />
-          <Route path="*" element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
+          <Route
+            path="*"
+            element={loggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />}
+          />
         </Routes>
         <Footer />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          buttonText={isLoading ? "Сохрание..." : "Сохранить"}
+          buttonText={isLoading ? 'Сохрание...' : 'Сохранить'}
         />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          buttonText={isLoading ? "Сохрание..." : "Сохранить"}
+          buttonText={isLoading ? 'Сохрание...' : 'Сохранить'}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          buttonText={isLoading ? "Создание..." : "Cоздать"}
+          buttonText={isLoading ? 'Создание...' : 'Cоздать'}
         />
-        <ImagePopup card={selectedCard} isOpen={selectedCard} onClose={closeAllPopups} link={selectedCard.link} name={selectedCard.name} />
-        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} isRegistrationStatus={isRegistrationStatus} />
+        <ImagePopup
+          card={selectedCard}
+          isOpen={selectedCard}
+          onClose={closeAllPopups}
+          link={selectedCard.link}
+          name={selectedCard.name}
+        />
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+          isRegistrationStatus={isRegistrationStatus}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
